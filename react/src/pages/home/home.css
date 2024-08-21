@@ -1,0 +1,200 @@
+.container{
+    max-width: 1140px;
+    margin: auto;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #26272b;
+    box-shadow: 0px 0px 12px #18191b;
+    border-radius: 8px;
+    margin: 2rem 1rem;
+    padding: .7rem 1rem;
+    font-weight: 700;
+}
+/* Style for the <h1> element in the overlay-text */
+.overlay-text h1 {
+    margin: 0; /* Remove default margin */
+    margin-left: 40px; /* Adjust this value to move the text right */
+}
+.overlay-text p {
+    margin: 0; /* Remove default margin */
+    padding-left: 40px; /* Adjust this value to move the text right */
+    color: gray; /* Ensure text color is gray if needed */
+}
+
+
+.coin-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #26272b;
+    box-shadow: 0px 0px 12px #18191b;
+    border-radius: 8px;
+    margin: 2rem 1rem;
+    padding: .7rem 1rem;
+}
+.coin-row p , .img-symbol , .heading p {
+width: 20%;
+}
+
+.coin-row:hover {
+    transform: scale(1.04);
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
+
+img {
+    height: 40px;
+    margin-right: 8px;
+    width: auto;
+}
+
+.img-symbol {
+    display: flex;
+    align-items: center;
+}
+
+.overlay-text {
+    top: 50%;
+}
+
+.overlay-text p {
+    color: gray;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack elements vertically */
+    width: 80%; /* Adjust the width as needed */
+    margin: auto; /* Center the container itself */
+    text-align: left;
+  }
+  
+  /* Flex items within the container */
+  .container_divs {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* Center vertically */
+    width: 100%; /* Ensure it takes full width of the parent */
+  }
+.recommend-list_group {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    padding: 0;
+    list-style: none;
+    margin: 0 auto; /* Center the container itself */
+    max-width: 1200px; /* Adjust as needed */
+  }
+  
+  .recommend-item {
+    /*background-color: #5E0A32; /* Background color for the box */
+    border: 2px solid #5E0A32; /* Border for the box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the box */
+    margin: 10px; /* Space between boxes */
+    text-align: center; /* Center text inside the box */
+    width: 200px; /* Width of each box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .symbol-detail, .symbol-price, .symbol-otcPrice {
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+  
+  .symbol-name {
+    font-weight: bold; /* Bold the symbol name */
+    font-size: 1.2em; /* Increase font size */
+  }
+  
+  .symbol-change {
+    font-size: 1em; /* Adjust font size */
+  }
+  
+  .symbol-price, .symbol-otcPrice {
+    font-size: 1em; /* Adjust font size */
+  }
+.symbol-name {
+    font-size: 14px;
+    line-height: 18px;
+    margin-right: 5px;
+    color: #ffffff;
+}
+.symbol-change {
+    font-size: 14px;
+    line-height: 18px;
+}
+.fall-1-cl {
+    color: rgb(255, 0, 0) !important;
+}
+.symbol-price {
+    font-size: 24px;
+    font-family: HarmonyOS-Bold;
+    line-height: 31px;
+    margin: 8px 0 4px;
+    color: #fdfdfd;
+}
+.symbol-otcPrice {
+    font-size: 12px;
+    line-height: 15px;
+    color: #ffffff;
+}
+@media screen and (max-width: 720px) {
+    .hide-mobile {
+        display: none;
+    }
+
+    .image-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .overlay-text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .overlay-text p {
+        text-align: center;
+    }
+    .recommend-list_group{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.page-button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: transparent; /* Make background transparent */
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px; /* Adjust the radius as needed */
+    color: #007bff; /* Set default text color */
+}
+
+.page-button.active {
+    background-color:gray;
+    color: white;
+}
+
+.page-button:hover:not(.active) {
+    background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+}
