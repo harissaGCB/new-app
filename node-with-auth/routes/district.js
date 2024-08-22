@@ -5,6 +5,7 @@ import {
   getDistricts,
   createDistrict,
   deleteDistrict,
+  initialDistricts,
 } from "../controllers/districtController.js";
 
 //middleware
@@ -19,10 +20,10 @@ import { validateId } from "../utils/validateId.js";
 const router = express.Router();
 
 router.get("/getAll", getDistricts);
-router.post("/create", adminAuth, createDistrict);
+router.post("/create", createDistrict);
+// router.post("/init", initialDistricts);
 router.delete(
   "/delete/:id",
-  adminAuth,
   (req, res, next) => validateId(req, res, next, district),
   deleteDistrict
 );

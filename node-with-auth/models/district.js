@@ -13,7 +13,6 @@ const district = sequelize.define(
   },
   {
     timestamps: true,
-    paranoid: true
   }
 );
 

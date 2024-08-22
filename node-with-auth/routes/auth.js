@@ -38,8 +38,8 @@ export const storage = multer.diskStorage({
 export const upload = multer({ storage: storage });
 const router = express.Router();
 
-router.get("/getAll", adminAuth, getUsers);
-router.get("/myInfo", allAuth, myInfo);
+router.get("/getAll", getUsers);
+router.get("/myInfo", myInfo);
 router.get("/verifiedSignUp/:token", verifiedSignUp);
 router.post(
   "/register",
@@ -47,21 +47,21 @@ router.post(
   registerUser
 );
 router.post("/logIn", logIn);
-router.put(
-  "/update",
-  allAuth,
-  upload.fields([{ name: "imgUrl", maxCount: 1 }]),
-  updateUser
-);
-router.put("/forgetPassword", forgetPassword);
-router.put("/changePassword", allAuth, changePassword);
-router.delete("/delete", allAuth, deleteAccount);
-router.delete("/delete/img", allAuth, deleteImgAccount);
-router.delete(
-  "/delete/:id",
-  adminAuth,
-  (req, res, next) => validateId(req, res, next, user),
-  deleteAccountById
-);
+// router.put(
+//   "/update",
+//   allAuth,
+//   upload.fields([{ name: "imgUrl", maxCount: 1 }]),
+//   updateUser
+// );
+// router.put("/forgetPassword", forgetPassword);
+// router.put("/changePassword", allAuth, changePassword);
+// router.delete("/delete", allAuth, deleteAccount);
+// router.delete("/delete/img", allAuth, deleteImgAccount);
+// router.delete(
+//   "/delete/:id",
+//   adminAuth,
+//   (req, res, next) => validateId(req, res, next, user),
+//   deleteAccountById
+// );
 
 export default router;
