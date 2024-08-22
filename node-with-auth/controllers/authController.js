@@ -98,11 +98,11 @@ export const registerUser = async (req, res) => {
       role: data.role,
     });
 
-    userNodemailer({
-      email: email,
-      subject: "Please verify your email",
-      html: verify(process.env.DOMAIN + "verifiedSignUp/" + token),
-    });
+    // userNodemailer({
+    //   email: email,
+    //   subject: "Please verify your email",
+    //   html: verify(process.env.DOMAIN + "verifiedSignUp/" + token),
+    // });
 
     return res.status(200).json({
       message: "Sending link to verify by email",

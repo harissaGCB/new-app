@@ -39,7 +39,7 @@ export const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.get("/getAll", getUsers);
-router.get("/myInfo", myInfo);
+// router.get("/myInfo", myInfo);
 router.get("/verifiedSignUp/:token", verifiedSignUp);
 router.post(
   "/register",
