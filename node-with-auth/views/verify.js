@@ -28,13 +28,13 @@ export const verify = (link) => {
           <div class="content">            
             <p class="en">
             Hello applicant,
-            Welcome to cancerCom!
+            Welcome to SignalGCB!
             Click on the below verification link to access your account:
             </p>
             <a href="${link}"><div class="the_button">Verify my email</div></a>
 
             <p class="arr">مرحبا مقدم الطلب،
-            أهلاً وسهلاً بك في موقع السرطان كوم!
+            أهلاً وسهلاً بك في موقع SignalGCB!
             إضغط على الرابط أدناه للتمكن من الدخول إلى حسابك:</p>
             <a href="${link}"><div class="the_button">تحقق من بريدي الإلكتروني</div></a>
           </div>

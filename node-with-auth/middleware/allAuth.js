@@ -19,7 +19,7 @@ const allAuth = async (req, res, next) => {
 
     const { role } = data;
 
-    if (![1, 3].includes(role)) {
+    if (![1, 2, 3].includes(role)) {
       return res.status(401).json({ message: "Not Authorized" });
     }
 

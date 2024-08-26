@@ -20,11 +20,12 @@ import { validateId } from "../utils/validateId.js";
 const router = express.Router();
 
 router.get("/getAll", getDistricts);
-router.post("/create", createDistrict);
+router.post("/create", adminAuth, createDistrict);
 // router.post("/init", initialDistricts);
 router.delete(
   "/delete/:id",
   (req, res, next) => validateId(req, res, next, district),
+  adminAuth,
   deleteDistrict
 );
 

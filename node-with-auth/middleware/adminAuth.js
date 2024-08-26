@@ -1,4 +1,3 @@
-import User from "../models/User.js";
 import { decodeToken } from "../utils/token.js";
 
 const adminAuth = async (req, res, next) => {
@@ -20,7 +19,7 @@ const adminAuth = async (req, res, next) => {
 
     const { role } = data;
 
-    if (![1].includes(role)) {
+    if (![1, 2].includes(role)) {
       return res.status(401).json({ message: "Not Authorized" });
     }
 

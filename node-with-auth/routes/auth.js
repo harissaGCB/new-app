@@ -3,17 +3,17 @@ import multer from "multer";
 
 //controllers
 import {
-  changePassword,
-  deleteAccount,
-  forgetPassword,
+  // changePassword,
+  // deleteAccount,
+  // forgetPassword,
   getUsers,
   logIn,
   myInfo,
   registerUser,
   verifiedSignUp,
-  deleteAccountById,
-  updateUser,
-  deleteImgAccount,
+  // deleteAccountById,
+  // updateUser,
+  // deleteImgAccount,
 } from "../controllers/authController.js";
 
 //middleware
@@ -38,8 +38,8 @@ export const storage = multer.diskStorage({
 export const upload = multer({ storage: storage });
 const router = express.Router();
 
-router.get("/getAll", getUsers);
-// router.get("/myInfo", myInfo);
+router.get("/getAll", adminAuth, getUsers);
+router.get("/myInfo", allAuth, myInfo);
 router.get("/verifiedSignUp/:token", verifiedSignUp);
 router.post(
   "/register",
