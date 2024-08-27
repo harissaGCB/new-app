@@ -14,7 +14,7 @@ export const userNodemailer = (data) => {
     },
   });
   const mailOptions = {
-    from:  `"CancerCom" <${process.env.EMAIL}>`,
+    from: `"GCB" <${process.env.EMAIL}>`,
     to: data.email,
     subject: data.subject,
     html: data.html,

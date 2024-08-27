@@ -3,9 +3,9 @@ import multer from "multer";
 
 //controllers
 import {
-  // changePassword,
+  changePassword,
   // deleteAccount,
-  // forgetPassword,
+  forgetPassword,
   getUsers,
   logIn,
   myInfo,
@@ -53,8 +53,8 @@ router.post("/logIn", logIn);
 //   upload.fields([{ name: "imgUrl", maxCount: 1 }]),
 //   updateUser
 // );
-// router.put("/forgetPassword", forgetPassword);
-// router.put("/changePassword", allAuth, changePassword);
+router.put("/forgetPassword", forgetPassword);
+router.put("/changePassword", allAuth, changePassword);
 // router.delete("/delete", allAuth, deleteAccount);
 // router.delete("/delete/img", allAuth, deleteImgAccount);
 // router.delete(

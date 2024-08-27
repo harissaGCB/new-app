@@ -300,60 +300,60 @@ export const verifiedSignUp = async (req, res) => {
 //   }
 // };
 
-// export const forgetPassword = async (req, res) => {
-//   const { email } = req.body;
-//   let data, code, hashedPassword;
+export const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  let data, code, hashedPassword;
 
-//   try {
-//     data = await user.findOne({ where: { email } });
-//     if (!data)
-//       return res.status(400).json({ message: "Email does not exist!" });
+  try {
+    data = await user.findOne({ where: { email } });
+    if (!data)
+      return res.status(400).json({ message: "Email does not exist!" });
 
-//     code = generatepassword(6);
-//     hashedPassword = await bcrypt.hash(code, 10);
-//     if (data) {
-//       data.password = hashedPassword;
-//       data.save();
-//     }
+    code = generatepassword(6);
+    hashedPassword = await bcrypt.hash(code, 10);
+    if (data) {
+      data.password = hashedPassword;
+      data.save();
+    }
 
-//     userNodemailer({
-//       email: email,
-//       subject: "Please verify your email",
-//       html: password(code),
-//     });
+    userNodemailer({
+      email: email,
+      subject: "Please verify your email",
+      html: password(code),
+    });
 
-//     return res
-//       .status(200)
-//       .json({ message: `The new password was send by ${email} successfully` });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+    return res
+      .status(200)
+      .json({ message: `The new password was send by ${email} successfully` });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-// export const changePassword = async (req, res) => {
-//   const { id } = req.userData;
-//   const { oldPassword, newPassword } = req.body;
-//   try {
-//     if (newPassword.length < 6)
-//       return res.status(400).json({
-//         message: "Password must be gratear then or equal to 6 Element!",
-//       });
-//     const data = await user.findByPk(id);
-//     const isPasswordCorrect = await bcrypt.compare(oldPassword, data.password);
-//     if (!isPasswordCorrect)
-//       return res.status(400).json({ message: "Your old password not matched" });
+export const changePassword = async (req, res) => {
+  const { id } = req.userData;
+  const { oldPassword, newPassword } = req.body;
+  try {
+    if (newPassword.length < 6)
+      return res.status(400).json({
+        message: "Password must be gratear then or equal to 6 Element!",
+      });
+    const data = await user.findByPk(id);
+    const isPasswordCorrect = await bcrypt.compare(oldPassword, data.password);
+    if (!isPasswordCorrect)
+      return res.status(400).json({ message: "Your old password not matched" });
 
-//     const hashedPassword = await bcrypt.hash(newPassword, 10);
-//     data.password = hashedPassword;
-//     data.save();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    data.password = hashedPassword;
+    data.save();
 
-//     return res
-//       .status(200)
-//       .json({ message: "Your Password changed successfully" });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+    return res
+      .status(200)
+      .json({ message: "Your Password changed successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 //by admin
 // export const deleteAccountById = async (req, res) => {
