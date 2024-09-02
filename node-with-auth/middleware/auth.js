@@ -1,6 +1,6 @@
 import { decodeToken } from "../utils/token.js";
 
-const adminAuth = async (req, res, next) => {
+const auth = async (req, res, next) => {
   try {
     const auth = req.header("authorization");
     if (!auth)
@@ -17,12 +17,6 @@ const adminAuth = async (req, res, next) => {
         message: "Not Authenticated",
       });
 
-    const { role } = data;
-
-    if (![1, 2].includes(role)) {
-      return res.status(401).json({ message: "Not Authorized" });
-    }
-
     // set the data into the request if all is good
     req.userData = data;
 
@@ -34,4 +28,4 @@ const adminAuth = async (req, res, next) => {
   }
 };
 
-export default adminAuth;
+export default auth;

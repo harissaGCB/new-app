@@ -16,10 +16,10 @@ const user = sequelize.define(
     yearOfBirthday: {
       type: DataTypes.DATEONLY,
     },
-    districtId: {
+    locationId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "districts",
+        model: "locations",
         key: "id",
       },
     },
@@ -33,8 +33,12 @@ const user = sequelize.define(
     password: {
       type: DataTypes.STRING,
     },
-    role: {
+    titleRoleId: {
       type: DataTypes.INTEGER,
+      references: {
+        model: "titleRoles",
+        key: "id",
+      },
     },
     isVerified: {
       type: DataTypes.BOOLEAN,

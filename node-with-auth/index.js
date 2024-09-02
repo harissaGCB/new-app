@@ -9,8 +9,10 @@ import sequelize from "./database.js";
 import "./associations.js";
 
 // Routers
-import authRouter from "./routes/auth.js";
-import districtRouter from "./routes/district.js";
+import userRouter from "./routes/user.js";
+import locationRouter from "./routes/location.js";
+import roleRouter from "./routes/role.js";
+import titleRoleRouter from "./routes/titleRole.js";
 
 dotenv.config();
 
@@ -30,8 +32,10 @@ app.use(morgan("dev"));
 const server = http.createServer(app);
 
 // define routers
-app.use("/", authRouter);
-app.use("/district", districtRouter);
+app.use("/", userRouter);
+app.use("/role", roleRouter);
+app.use("/titleRole", titleRoleRouter);
+app.use("/location", locationRouter);
 
 const port = process.env.PORT;
 

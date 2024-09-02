@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
-import fs from "fs";
 import moment from "moment";
 
 //models
 import user from "../models/user.js";
-import district from "../models/district.js";
+import location from "../models/location.js";
+import titleRole from "../models/titleRole.js";
+import role from "../models/role.js";
 
 //utils
 import { createToken, decodeToken } from "../utils/token.js";
@@ -17,7 +18,6 @@ import { verify } from "../views/verify.js";
 //utils
 import { userNodemailer } from "../utils/nodemailer.js";
 
-//USER
 export const getUsers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -51,8 +51,8 @@ export const registerUser = async (req, res) => {
     fullName,
     phoneNumber,
     gender,
-    yearOfBirthday,
-    districtId,
+    dateOfBirthday,
+    locationId,
     email,
   } = req.body;
   let token, exist, hashedPassword, data, imgUrl;
@@ -81,18 +81,20 @@ export const registerUser = async (req, res) => {
         });
     } else return res.status(400).json({ message: "Password is required!" });
 
-    if (!yearOfBirthday)
-      return res.status(400).json({ message: "Year of Birth is required!" });
+    if (!dateOfBirthday)
+      return res
+        .status(400)
+        .json({ message: "Date of Birth Day is required!" });
 
-    const dateOfBirth = moment(yearOfBirthday, "YYYY-MM-DD", true);
+    const dateOfBirth = moment(dateOfBirthday, "YYYY-MM-DD", true);
     if (!dateOfBirth.isValid()) {
       return res
         .status(400)
-        .json({ message: "Invalid date format for Year of Birth!" });
+        .json({ message: "Invalid date format for Date of Birth!" });
     }
 
-    if (!districtId)
-      return res.status(400).json({ message: "District is required!" });
+    if (!locationId)
+      return res.status(400).json({ message: "Location is required!" });
 
     hashedPassword = await bcrypt.hash(password, 10);
     data = await user.create({
@@ -100,9 +102,9 @@ export const registerUser = async (req, res) => {
       phoneNumber,
       gender,
       yearOfBirthday: dateOfBirth.toDate(),
-      districtId,
+      locationId,
       email,
-      role: 3,
+      titleRoleId: 3,
       password: hashedPassword,
       imgUrl,
     });
@@ -128,76 +130,15 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// export const updateUser = async (req, res) => {
-//   const { id } = req.userData;
-//   const { fullName, phoneNumber, gender, yearOfBirthday, districtId } =
-//     req.body;
-//   let data, imgUrl;
-
-//   try {
-//     if (req.files.imgUrl) imgUrl = req.files.imgUrl[0].filename;
-//     data = await user.findByPk(id);
-//     data.fullName = fullName;
-//     data.gender = gender;
-//     data.phoneNumber = phoneNumber;
-//     data.yearOfBirthday = yearOfBirthday;
-//     data.districtId = districtId;
-//     if (imgUrl) {
-//       if (data.imgUrl !== "default.png") {
-//         try {
-//           if (fs.existsSync("uploads/user/" + data.imgUrl))
-//             fs.unlinkSync("uploads/user/" + data.imgUrl);
-//         } catch (error) {
-//           console.log({ message: error.message });
-//         }
-//       }
-//       data.imgUrl = imgUrl;
-//     }
-//     await data.save();
-
-//     data = await user.findByPk(id, {
-//       include: [{ model: district }],
-//     });
-
-//     return res.status(200).json({ message: "Update successfully.", data });
-//   } catch (e) {
-//     return res.status(500).json({ message: e.message });
-//   }
-// };
-
-// export const deleteImgAccount = async (req, res) => {
-//   const { id } = req.userData;
-//   try {
-//     const data = await user.findByPk(id);
-
-//     if (data) {
-//       const imgUrl = data.imgUrl;
-
-//       if (imgUrl !== "default.png") {
-//         try {
-//           if (fs.existsSync("uploads/user/" + imgUrl))
-//             fs.unlinkSync("uploads/user/" + imgUrl);
-//         } catch (error) {
-//           console.log({ message: error.message });
-//         }
-//         data.imgUrl = "default.png";
-//       }
-//       await data.save();
-//     }
-
-//     return res.status(200).json({ message: "deleted successfuly" });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
-
-//BOTH
 export const myInfo = async (req, res) => {
   const id = req.userData.id;
 
   try {
     const data = await user.findByPk(id, {
-      include: [{ model: district }],
+      include: [
+        { model: location },
+        { model: titleRole, include: { model: role } },
+      ],
     });
 
     return res.status(200).json({ message: "Fetched successfully.", data });
@@ -206,14 +147,17 @@ export const myInfo = async (req, res) => {
   }
 };
 
-export const logIn = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
   let token, isPasswordCorrect;
 
   try {
     const data = await user.findOne({
       where: { email },
-      include: [{ model: district }],
+      include: [
+        { model: location },
+        { model: titleRole, include: { model: role } },
+      ],
     });
 
     if (!data)
@@ -273,33 +217,6 @@ export const verifiedSignUp = async (req, res) => {
   }
 };
 
-// export const deleteAccount = async (req, res) => {
-//   const { id } = req.userData;
-//   try {
-//     const data = await user.findByPk(id);
-
-//     if (data) {
-//       const imgUrl = data.imgUrl;
-
-//       if (imgUrl !== "default.png") {
-//         try {
-//           if (fs.existsSync("uploads/user/" + imgUrl))
-//             fs.unlinkSync("uploads/user/" + imgUrl);
-//         } catch (error) {
-//           console.log({ message: error.message });
-//         }
-//         data.imgUrl = "default.png";
-//       }
-//       await data.save();
-//     }
-//     await user.destroy({ where: { id: id } });
-
-//     return res.status(200).json({ message: "deleted successfuly" });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
-
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
   let data, code, hashedPassword;
@@ -354,31 +271,3 @@ export const changePassword = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
-//by admin
-// export const deleteAccountById = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const data = await user.findByPk(id);
-
-//     if (data) {
-//       const imgUrl = data.imgUrl;
-
-//       if (imgUrl !== "default.png") {
-//         try {
-//           if (fs.existsSync("uploads/user/" + imgUrl))
-//             fs.unlinkSync("uploads/user/" + imgUrl);
-//         } catch (error) {
-//           console.log({ message: error.message });
-//         }
-//         data.imgUrl = "default.png";
-//       }
-//       await data.save();
-//     }
-//     await user.destroy({ where: { id: id } });
-
-//     return res.status(200).json({ message: "deleted successfuly" });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };

@@ -1,13 +1,13 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database.js";
 
-const district = sequelize.define(
-  "districts",
+const location = sequelize.define(
+  "locations",
   {
     nameEn: {
       type: DataTypes.STRING,
     },
-    nameAr: {
+    nameTr: {
       type: DataTypes.STRING,
     },
   },
@@ -16,4 +16,4 @@ const district = sequelize.define(
   }
 );
 
-export default district;
+export default location;
