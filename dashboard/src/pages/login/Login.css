@@ -1,0 +1,81 @@
+.logLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.CardStyleLogin {
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px black;
+  background-color: #fff;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.CardStyleLogin:hover {
+  box-shadow: 0 6px 25px black;
+}
+
+.Logtitle {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.lableNameLogin {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.inContainerLogin {
+  margin-bottom: 20px;
+}
+
+.inLogin {
+  width: 83%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid silver;
+  font-size: 0.9rem;
+  transition: border 0.3s ease;
+}
+
+.inLogin:focus {
+  border-color: black;
+  outline: none;
+  box-shadow: 0 0 8px silver;
+}
+
+.inputGroupAppendLogin {
+  cursor: pointer;
+}
+
+.btnLogin {
+  background-color: silver;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.btnLogin:hover {
+  background-color: black;
+}
+
+.redErrorLogin {
+  color: red;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .CardStyleLogin {
+    width: 90%;
+  }
+}

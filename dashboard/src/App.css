@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(100deg, black, white);
+}
+
+h1 h2 h3 h4 h5 h6 p {
+  color: white;
+}
